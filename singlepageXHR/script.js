@@ -1,5 +1,5 @@
 function initXHR(x) {
-	console.log(x);
+	console.log(x); 
 	if (x == 'home') {
 		document.getElementById("home").style.display = "block";
 		document.getElementById("lists").style.display = "none";
