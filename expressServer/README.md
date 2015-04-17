@@ -5,7 +5,9 @@ This directory contains two express servers:
 Make sure you install the node.js server software.  Ensure your path variable contains the execution path of the node.js binary.
 
 To execute the server run one of the following commands:
+
 1. node eServer.js
+
 2. node eServerParams.js
 
 To test server #1, try the following URL on the browser, while the server is running:
