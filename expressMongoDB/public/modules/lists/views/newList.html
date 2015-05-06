@@ -1,0 +1,46 @@
+<div id="newList" ng-controller='ListsCtrl' ng-init='initNewList()'>
+	<h1>New List</h1>
+	<p></p>
+	<div class="panel panel-default">
+	  <div class="panel-heading">Id</div>
+	  <div class="panel-body">
+		<span ng-bind='list.listId' id='lId' class="label label-default"></span>
+	  </div>
+	</div>		
+	<div class="panel panel-default">
+	  <div class="panel-heading">Name</div>
+	  <div class="panel-body">
+		<input id="lName" ng-model="list.name" type="text" class="form-control" placeholder="Name of your list" aria-describedby="basic-addon1">
+	  </div>
+	</div>		
+	<div class="panel panel-default">
+	  <div class="panel-heading">Description</div>
+	  <div class="panel-body">
+		<input id="lDesc" ng-model="list.description" type="text" class="form-control" placeholder="Name of your list" aria-describedby="basic-addon1">
+	  </div>
+	</div>		
+	<div class="panel panel-default">
+	  <div class="panel-heading">Due Date</div>
+	  <div class="panel-body">
+		<input id="lDDate" ng-model="list.due" type="text" class="form-control" placeholder="Completion date" aria-describedby="basic-addon1">
+	  </div>
+	 </div>				
+	<div class="panel panel-default">
+	  <div class="panel-heading">State</div>
+	  <div class="panel-body">
+		<span ng-bind="list.state" class="label label-default"></span>
+	  </div>
+	 </div>
+	<div class="panel panel-default">
+	  <div class="panel-heading">Owner</div>
+	  <div class="panel-body">
+		<span ng-bind="list.owner" id='lOwner' class="label label-default"></span>
+	  </div>
+	 </div>
+
+	 <p class="verticalSpace"></p>
+	  <a class="btn btn-lg btn-primary" ng-click='writeList()' role="button">Add</a>
+	<p class="verticalSpace"></p>
+			 
+<!--	<button ng-click="createNew('newList')" type="button" class="btn btn-default">Add</button> -->
+</div>
