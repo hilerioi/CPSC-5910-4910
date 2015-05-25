@@ -1,0 +1,6 @@
+<% if (!user) { %>
+	<h2>Welcome! Please log in.</h2>
+	<a href="/auth/windowslive">Login with Windows Live</a>	
+<% } else { %>
+	<h2>Hello, <%= user.displayName %>.</h2>
+<% } %>

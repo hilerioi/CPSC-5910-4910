@@ -1,0 +1,121 @@
+<div class="panel panel-default" ng-controller='ListsCtrl' ng-init='initList()'>
+  <!-- Default panel contents -->
+  <h4 class="panel-heading">
+	<div ng-if="!listEdit">{{list.name}}</div>
+	<input ng-if="listEdit" id="lName" ng-model="list.name" type="text" class="form-control" placeholder="Name of your list" aria-describedby="basic-addon1">
+
+<!--	<a href="#/lists/{{list.listId}}/update"> -->
+		<span ng-if="!listEdit" ng-click="enableListEdit()" class="glyphicon glyphicon-edit pull-right"></span>
+		<span ng-if="listEdit" ng-click="disableListEdit()" class="glyphicon glyphicon-remove pull-right"></span>
+		<span ng-if="list.state!='A'" ng-click="setState('A');" class="glyphicon glyphicon-time" pull-right></span>
+		<span ng-if="list.state=='A'" ng-click="setState('I');" class="glyphicon glyphicon-ok" pull-right></span>
+<!--	</a> -->
+  </h4>
+  <div class="panel-body">
+	<p ng-if="!listEdit" >{{list.description}}</p>
+	<input ng-if="listEdit" id="lDesc" ng-model="list.description" type="text" class="form-control" placeholder="Name of your list" aria-describedby="basic-addon1">
+  </div>
+
+	<!-- Table -->
+	<table class="table" style="font-size:10pt;">
+		<tbody>
+			<tr>
+				<td>Due: 
+					<span ng-if="!listEdit">{{list.due}}</span>
+					<input ng-if="listEdit" id="lDDate" ng-model="list.due" type="text" class="form-control" placeholder="Completion date" aria-describedby="basic-addon1">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div ng-controller='ItemsCtrl' ng-init='getItems()'>
+	<div class="panel panel-default" >
+		<table class="table" style="font-size:10pt;">
+			<thead>
+				<tr style="background-color:rgb(236,236,236)">
+					<th>
+						<h4>{{'Tasks ' | checkEdit:taskEdit}}</h4>
+						<span ng-if="!taskEdit" ng-click="enableTaskEdit(tasks.length, 'New')" class="glyphicon glyphicon-edit"></span>
+						<span ng-if="taskEdit" ng-click="disableTaskEdit()" class="glyphicon glyphicon-remove"></span>
+					</th>
+					<th width="5%">Shared</th>
+					<th width="5%">Status</th>
+					<th width="5%">Actions </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-if="!taskEdit" ng-repeat='task in results.tasks'>
+					<td>{{$index + 1}}. {{task.description}}</td>
+					<td><span class="badge">{{task.shared}}</span></td>
+					<td>
+						<span ng-if="task.status!='A'" ng-click="setStatus($index, 'A');" class="glyphicon glyphicon-time"></span>
+						<span ng-if="task.status=='A'" ng-click="setStatus($index, 'I');" class="glyphicon glyphicon-ok"></span>
+<!--						<div class="input-group">
+						  <span class="input-group-addon" style="border-style:none;">
+						  
+							<input type="checkbox" ng-model="checked" ng-init="checkValue(task.status);">
+						  </span>
+						</div>
+-->
+					</td>
+					<td>
+						<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
+					</td>
+				</tr>
+				<tr ng-if="taskEdit" ng-repeat='task in results.tasks'>
+					<td><input ng-model="task.description" type="text" class="form-control" placeholder="Task description"></td>
+					<td><input ng-model="task.shared" type="text" class="form-control" placeholder="Person to share with"></td>
+					<td>
+						<a ng-if="task.status!='A'" ><span ng-click="setStatus($index, 'A');" class="glyphicon glyphicon-time"></span></a>
+						<a ng-if="task.status=='A'" ><span ng-click="setStatus($index, 'I');" class="glyphicon glyphicon-ok"></span></a>
+<!--						<input type="checkbox" ng-model="checked" ng-init="checkValue(task.status);">-->
+					</td>
+					<td>
+						<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+<!--	<div ng-if="edit" id="newTask" class="panel panel-default">
+		<h5 class="panel-heading">{{action}} Task - {{indexValue+1}}<a><span ng-click="disableEdit()" class="glyphicon glyphicon glyphicon-remove pull-right"></span></a></h5>
+		<p class="verticalSpace"></p>
+		<div style="margin:10px;" class="panel panel-default">
+		  <div class="panel-heading">Description</div>
+		  <div class="panel-body">
+			<input id="tText" ng-model="task.description" type="text" class="form-control" placeholder="Name of your list" aria-describedby="basic-addon1">
+		  </div>
+		</div>
+		<div style="margin:10px;" class="panel panel-default">
+		  <div class="panel-heading">Assigned to</div>
+		  <div class="panel-body">
+			<input id="tArg1" ng-model="task.shared" type="text" class="form-control" placeholder="Extra instructions" aria-describedby="basic-addon1">
+		  </div>
+		</div>
+		<div style="margin:10px;" class="panel panel-default">
+		  <div class="panel-heading">Status</div>
+		  <div class="panel-body">
+			<input id="tArg2" ng-model="task.status" type="text" class="form-control" placeholder="Image" aria-describedby="basic-addon1">
+		  </div>
+		</div>
+		<p class="verticalSpace"></p>
+		<div class="container-fluid">
+			<div class="navbar-form">
+				<div class="form-group">
+					<label>Description</label>
+					<input class="form-control" type="text">
+				</div>
+			</div>
+			<div class="navbar-form">
+				<div class="form-group">
+					<label class="form-control">Description</label>
+					<input class="form-control" type="text">
+				</div>
+			</div>
+		</div>
+		<button style="margin:10px;" ng-click="" type="button" class="btn btn-default">{{action}}</button>
+		<a class="btn btn-lg btn-primary" role="button">{{action}}</a>
+		<p class="verticalSpace"></p>
+	</div>
+	-->
+</div>
