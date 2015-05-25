@@ -1,0 +1,34 @@
+<div class="panel panel-default" ng-init='getItems()'>
+	<!-- Default panel contents -->
+	<div class="panel-heading">
+	  <h3>{{listName}} - Tasks</h3>
+	</div>
+	<!-- Table -->
+	<table class="table" style="font-size:10pt;">
+		<thead>
+			<tr>
+				<th>Items</th>
+				<th width="5%">Shared</th>
+				<th width="5%">Status</th>
+				<th width="5%">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat='task in results.tasks'>
+				<td>{{task.description}}</td>
+				<td><span class="badge">{{task.shared}}</span></td>
+				<td>
+					<div class="input-group">
+					  <span class="input-group-addon" style="border-style:none;">
+						<input type="checkbox" ng-model="checked" ng-init="checkValue(task.status);">
+					  </span>
+					</div>  
+				</td>
+				<td>
+					<a href="#"><span class="glyphicon glyphicon-edit"></span></a>
+					<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
